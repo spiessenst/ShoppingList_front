@@ -214,6 +214,7 @@ p{
                     
                 }
                 &__left{
+                    padding-left:10px;
                     color: white;
                     font-size: 21px;
                     width: 30%;
@@ -269,4 +270,17 @@ p{
                      color: white;
                      cursor: pointer;
                 }
+            }
+
+
+            .choosebutton{
+                margin-top: 25px;
+                width: 100%;
+                background-color:$color-green-main ;
+                padding: 10px 20px 10px 20px;
+                border-radius: 5px;
+                color: white;
+                text-align: center;
+                font-size: 16px;
+                cursor: pointer;
             }

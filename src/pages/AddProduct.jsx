@@ -3,11 +3,13 @@ import { useState, useEffect } from "react";
 import Add from "../components/Add";
 import List from "../components/List";
 import Departments from "../components/Departments";
+import ChooseStoreButton from "../components/ChooseStoreButton";
 
-const AddProduct = () => {
+const AddProduct = ({ stores, setStoreId, storeId }) => {
   const [products, setProducts] = useState([]);
   const [shoppingListId, setshoppingListId] = useState(1);
-  const [storeId, setStoreId] = useState(1);
+  // const [stores, setStores] = (useState = []);
+  //  const [storeId, setStoreId] = useState(1);
   const [newproduct, setNewProduct] = useState("");
   const [product, setProduct] = useState("");
   const [list, setList] = useState([]);
@@ -87,7 +89,7 @@ const AddProduct = () => {
         console.log(error);
       }
     })();
-  }, [newproduct]);
+  }, [newproduct, storeId]);
 
   useEffect(() => {
     (async () => {
@@ -100,6 +102,18 @@ const AddProduct = () => {
       }
     })();
   }, []);
+
+  //   useEffect(() => {
+  //     (async () => {
+  //       try {
+  //         const url = `https://wdev2.be/fs_thomass/shoppinglist/v1/stores`;
+  //         const { data } = await axios(url);
+  //         setStores(data);
+  //       } catch (error) {
+  //         console.log(error);
+  //       }
+  //     })();
+  //   }, []);
 
   async function renderList() {
     try {
@@ -181,11 +195,13 @@ const AddProduct = () => {
   }
   return (
     <>
+      <ChooseStoreButton stores={stores} setStoreId={setStoreId} />
       <Add
         products={products}
         setProduct={setProduct}
         setNewProduct={setNewProduct}
       />
+
       {showDepartments && (
         <Departments departments={departments} setDepartment={setDepartment} />
       )}
