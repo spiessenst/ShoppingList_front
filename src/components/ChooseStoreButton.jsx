@@ -1,9 +1,11 @@
 import { Link } from "react-router-dom";
 
-const ChooseStoreButton = () => {
+const ChooseStoreButton = ({ storeName }) => {
   return (
     <Link to="/ChooseStore">
-      <div className="choosebutton">Kies Winkel</div>
+      <div className="choosebutton">
+        {!storeName ? "Kies winkel" : `Geselecteerde winkel is: ${storeName}`}
+      </div>
     </Link>
   );
 };

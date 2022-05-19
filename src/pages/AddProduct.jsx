@@ -22,26 +22,10 @@ const AddProduct = ({
   //  const [storeId, setStoreId] = useState(1);
   const [newproduct, setNewProduct] = useState("");
   const [product, setProduct] = useState("");
-
+  const [storeName, setStoreName] = useState("");
   const [showDepartments, setShowDepartments] = useState(false);
   const [departments, setDepartments] = useState([]);
   const [department, setDepartment] = useState();
-
-  // useEffect(() => {
-  //   (async () => {
-  //     try {
-  //       await axios
-  //         .post(`https://wdev2.be/fs_thomass/shoppinglist/v1/list`, {
-  //           shoppinglist_name: "Mijn nieuwe lijst " + Date(),
-  //         })
-  //         .then(({ data }) => {
-  //           setshoppingListId(data[0].shoppinglist_id);
-  //         });
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   })();
-  // }, []);
 
   useEffect(() => {
     (async () => {
@@ -137,6 +121,7 @@ const AddProduct = ({
         setList([]);
       }
       data && setList(data.items);
+      setStoreName(data.store.store_name);
     } catch (error) {
       console.log(error);
     }
@@ -212,7 +197,11 @@ const AddProduct = ({
   }
   return (
     <>
-      <ChooseStoreButton stores={stores} setStoreId={setStoreId} />
+      <ChooseStoreButton
+        stores={stores}
+        setStoreId={setStoreId}
+        storeName={storeName}
+      />
 
       <ListName listName={listName} />
       <Add
