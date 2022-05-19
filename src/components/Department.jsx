@@ -4,6 +4,7 @@ const Department = ({
 }) => {
   function handleClick(e) {
     setDepartment(e.target.dataset.id);
+    // document.getElementById(":r1:").value = "";
   }
   return (
     <li

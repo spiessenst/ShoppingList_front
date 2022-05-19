@@ -13,13 +13,12 @@ function Add({ products, setProduct, setNewProduct }) {
   function HandleOnClick(e) {
     e.preventDefault();
 
-    item && setProduct(item);
-
-    if (item.value == undefined) {
-      setNewProduct(value);
-    }
+    if (item.value == undefined) setNewProduct(value);
 
     setValue("");
+
+    item && setProduct(item);
+
     setItem({});
   }
 

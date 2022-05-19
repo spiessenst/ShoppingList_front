@@ -4,18 +4,44 @@ import Add from "../components/Add";
 import List from "../components/List";
 import Departments from "../components/Departments";
 import ChooseStoreButton from "../components/ChooseStoreButton";
+import { ListName } from "../components/ListName";
 
-const AddProduct = ({ stores, setStoreId, storeId }) => {
+const AddProduct = ({
+  stores,
+  setStoreId,
+  storeId,
+  shoppingListId,
+  list,
+  setList,
+  listName,
+  setListName,
+}) => {
   const [products, setProducts] = useState([]);
-  const [shoppingListId, setshoppingListId] = useState(1);
+  //const [shoppingListId, setshoppingListId] = useState(1);
   // const [stores, setStores] = (useState = []);
   //  const [storeId, setStoreId] = useState(1);
   const [newproduct, setNewProduct] = useState("");
   const [product, setProduct] = useState("");
-  const [list, setList] = useState([]);
+
   const [showDepartments, setShowDepartments] = useState(false);
   const [departments, setDepartments] = useState([]);
   const [department, setDepartment] = useState();
+
+  // useEffect(() => {
+  //   (async () => {
+  //     try {
+  //       await axios
+  //         .post(`https://wdev2.be/fs_thomass/shoppinglist/v1/list`, {
+  //           shoppinglist_name: "Mijn nieuwe lijst " + Date(),
+  //         })
+  //         .then(({ data }) => {
+  //           setshoppingListId(data[0].shoppinglist_id);
+  //         });
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   })();
+  // }, []);
 
   useEffect(() => {
     (async () => {
@@ -103,22 +129,13 @@ const AddProduct = ({ stores, setStoreId, storeId }) => {
     })();
   }, []);
 
-  //   useEffect(() => {
-  //     (async () => {
-  //       try {
-  //         const url = `https://wdev2.be/fs_thomass/shoppinglist/v1/stores`;
-  //         const { data } = await axios(url);
-  //         setStores(data);
-  //       } catch (error) {
-  //         console.log(error);
-  //       }
-  //     })();
-  //   }, []);
-
   async function renderList() {
     try {
       const url = `https://wdev2.be/fs_thomass/shoppinglist/v1/list/${shoppingListId}/${storeId}`;
       const { data } = await axios(url);
+      if (data == null) {
+        setList([]);
+      }
       data && setList(data.items);
     } catch (error) {
       console.log(error);
@@ -196,6 +213,8 @@ const AddProduct = ({ stores, setStoreId, storeId }) => {
   return (
     <>
       <ChooseStoreButton stores={stores} setStoreId={setStoreId} />
+
+      <ListName listName={listName} />
       <Add
         products={products}
         setProduct={setProduct}
@@ -205,6 +224,7 @@ const AddProduct = ({ stores, setStoreId, storeId }) => {
       {showDepartments && (
         <Departments departments={departments} setDepartment={setDepartment} />
       )}
+
       <List
         list={list}
         handleIncrement={handleIncrement}
