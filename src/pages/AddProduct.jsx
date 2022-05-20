@@ -5,6 +5,8 @@ import List from "../components/List";
 import Departments from "../components/Departments";
 import ChooseStoreButton from "../components/ChooseStoreButton";
 import { ListName } from "../components/ListName";
+import SaveList from "../components/SaveList";
+import DeleteList from "../components/DeleteList";
 
 const AddProduct = ({
   stores,
@@ -119,9 +121,10 @@ const AddProduct = ({
       const { data } = await axios(url);
       if (data == null) {
         setList([]);
+      } else {
+        data && setList(data.items);
+        setStoreName(data.store.store_name);
       }
-      data && setList(data.items);
-      setStoreName(data.store.store_name);
     } catch (error) {
       console.log(error);
     }
@@ -221,6 +224,9 @@ const AddProduct = ({
         handleDelete={handleDelete}
         handleCheck={handleCheck}
       />
+
+      <SaveList />
+      <DeleteList shoppingListId={shoppingListId} />
     </>
   );
 };

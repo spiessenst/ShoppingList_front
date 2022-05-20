@@ -291,3 +291,35 @@ p{
                 font-size: 22px;
                 color: gray        
               }
+
+
+              .btn_save{
+                border: 0;
+                margin-top: 25px;
+                width: 100%;
+                background-color:$color-green-main ;
+                padding: 10px 20px 10px 20px;
+                border-radius: 5px;
+                color: white;
+                text-align: center;
+                font-size: 16px;
+                cursor: pointer;
+
+
+              }
+
+              
+              .btn_delete{
+                border: 0;
+                margin-top: 25px;
+                width: 100%;
+                background-color:rgb(255, 68, 68); ;
+                padding: 10px 20px 10px 20px;
+                border-radius: 5px;
+                color: white;
+                text-align: center;
+                font-size: 16px;
+                cursor: pointer;
+
+
+              }
