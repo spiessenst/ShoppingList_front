@@ -1,20 +1,20 @@
-import axios from "axios";
+import { Link } from "react-router-dom";
 
 const DeleteList = ({ shoppingListId }) => {
   async function handleClick() {
-    console.log(shoppingListId);
     await fetch(`https://wdev2.be/fs_thomass/shoppinglist/v1/list`, {
       method: "DELETE",
       body: JSON.stringify({
         shoppinglist_id: parseInt(shoppingListId),
       }),
     });
-    
   }
   return (
-    <button className="btn_delete" onClick={handleClick}>
-      Verwijder lijst
-    </button>
+    <Link to="/">
+      <button className="btn_delete" onClick={handleClick}>
+        Verwijder lijst
+      </button>
+    </Link>
   );
 };
 

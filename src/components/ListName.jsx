@@ -1,4 +1,7 @@
 export const ListName = ({ listName }) => {
-  //<p className="listName" contentEditable={true}>{listName}</p>
-  return <></>;
+  return (
+    <p className="listName" contentEditable={true}>
+      {listName}
+    </p>
+  );
 };
