@@ -9,6 +9,7 @@ const DeleteList = ({ shoppingListId }) => {
         shoppinglist_id: parseInt(shoppingListId),
       }),
     });
+    
   }
   return (
     <button className="btn_delete" onClick={handleClick}>
