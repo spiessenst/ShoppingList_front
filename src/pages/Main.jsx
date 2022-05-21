@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { formatDate } from "../js/functions";
 const Main = ({ setshoppingListId, setList, setListName }) => {
-  console.log();
   async function handleClick() {
     try {
       await axios
@@ -12,7 +11,6 @@ const Main = ({ setshoppingListId, setList, setListName }) => {
         .then(({ data }) => {
           setListName(data[0].shoppinglist_name);
           setshoppingListId(data[0].shoppinglist_id);
-          setList([]);
         });
     } catch (error) {
       console.log(error);

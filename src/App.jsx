@@ -10,7 +10,6 @@ const App = () => {
   const [stores, setStores] = useState([]);
   const [storeId, setStoreId] = useState(1);
   const [shoppingListId, setshoppingListId] = useState(1);
-  
   const [Lists, setLists] = useState([]);
   const [listName, setListName] = useState("");
   const [list, setList] = useState([]);

@@ -12,23 +12,28 @@ const PrevLists = ({ Lists, setshoppingListId, setLists, setListName }) => {
         console.log(error);
       }
     })();
-  }, []);
+  }, [Lists]);
   function handleClick(e) {
     setshoppingListId(e.target.dataset.id);
-    
+
     setListName(
       Lists.filter((list) => list.shoppinglist_id == e.target.dataset.id)[0]
         .shoppinglist_name
     );
-   // console.log(e.target.dataset.id);
   }
   return (
-    <ul>
+    <ul className="lists">
       {Lists &&
         Lists.map((list) => (
           <Link key={list.shoppinglist_id} to="/AddProduct">
-            <li data-id={list.shoppinglist_id} onClick={handleClick}>
-              {list.shoppinglist_name}
+            <li
+              className="lists__item"
+              data-id={list.shoppinglist_id}
+              onClick={handleClick}
+            >
+              <span>
+                {list.shoppinglist_name} {list.shoppinglist_id}
+              </span>
             </li>
           </Link>
         ))}

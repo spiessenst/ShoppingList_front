@@ -5,7 +5,6 @@ import List from "../components/List";
 import Departments from "../components/Departments";
 import ChooseStoreButton from "../components/ChooseStoreButton";
 import { ListName } from "../components/ListName";
-import SaveList from "../components/SaveList";
 import DeleteList from "../components/DeleteList";
 
 const AddProduct = ({
@@ -81,7 +80,6 @@ const AddProduct = ({
           setNewProduct("");
           setDepartment();
           setShowDepartments(false);
-
           renderList();
         }
       } catch (error) {
@@ -206,7 +204,11 @@ const AddProduct = ({
         storeName={storeName}
       />
 
-      <ListName listName={listName} />
+      <ListName
+        listName={listName}
+        setListName={setListName}
+        shoppingListId={shoppingListId}
+      />
       <Add
         products={products}
         setProduct={setProduct}
@@ -225,7 +227,6 @@ const AddProduct = ({
         handleCheck={handleCheck}
       />
 
-      <SaveList />
       <DeleteList shoppingListId={shoppingListId} />
     </>
   );

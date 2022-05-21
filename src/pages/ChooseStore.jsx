@@ -5,9 +5,14 @@ const ChooseStore = ({ stores, setStoreId }) => {
     setStoreId(e.target.dataset.id);
   }
   return stores.map((store) => (
-    <ul>
+    <ul className="lists">
       <Link key={store.store_id} to="/AddProduct">
-        <li key={store.store_id} data-id={store.store_id} onClick={handleClick}>
+        <li
+          className="lists__item"
+          key={store.store_id}
+          data-id={store.store_id}
+          onClick={handleClick}
+        >
           {store.store_name}
         </li>
       </Link>
