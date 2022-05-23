@@ -18,9 +18,6 @@ const AddProduct = ({
   setListName,
 }) => {
   const [products, setProducts] = useState([]);
-  //const [shoppingListId, setshoppingListId] = useState(1);
-  // const [stores, setStores] = (useState = []);
-  //  const [storeId, setStoreId] = useState(1);
   const [newproduct, setNewProduct] = useState("");
   const [product, setProduct] = useState("");
   const [storeName, setStoreName] = useState("");
@@ -28,13 +25,18 @@ const AddProduct = ({
   const [departments, setDepartments] = useState([]);
   const [department, setDepartment] = useState();
 
+  useEffect(() => () => {
+    renderList();
+  });
+
   useEffect(() => {
     (async () => {
       try {
+        //staat het al in de lijst ?
         const listfind = list.find(
           (listitem) => listitem.product_id == product.id
         );
-
+        //als het niet in de lijst staat voeg toe
         !listfind &&
           product.id != null &&
           (await axios
@@ -55,16 +57,19 @@ const AddProduct = ({
 
   useEffect(() => {
     (async () => {
+      // is het een nieuw product laat de deparments lijst zien en voeg toe
       newproduct && setShowDepartments(true);
       try {
         if (department) {
           await axios
+            // product toevoegen bij productenlijst
             .post(`https://wdev2.be/fs_thomass/shoppinglist/v1/product`, {
               product_name: newproduct.toLowerCase(),
               department_id: department,
             })
             .then(({ data }) =>
               axios.post(
+                //product aan lijst toevoegen
                 `https://wdev2.be/fs_thomass/shoppinglist/v1/listproduct`,
                 {
                   shoppinglist_id: shoppingListId,
@@ -91,6 +96,7 @@ const AddProduct = ({
   useEffect(() => {
     (async () => {
       try {
+        //haal de producten op
         const url = `https://wdev2.be/fs_thomass/shoppinglist/v1/products`;
         const { data } = await axios(url);
         setProducts(data);
@@ -104,6 +110,7 @@ const AddProduct = ({
   useEffect(() => {
     (async () => {
       try {
+        //haal departments op
         const url = `https://wdev2.be/fs_thomass/shoppinglist/v1/departments`;
         const { data } = await axios(url);
         setDepartments(data);
@@ -115,6 +122,7 @@ const AddProduct = ({
 
   async function renderList() {
     try {
+      //render de juiste lijst voor de geselecteerde winkel
       const url = `https://wdev2.be/fs_thomass/shoppinglist/v1/list/${shoppingListId}/${storeId}`;
       const { data } = await axios(url);
       if (data == null) {
@@ -123,6 +131,7 @@ const AddProduct = ({
         data && setList(data.items);
         setStoreName(data.store.store_name);
       }
+      console.log(list);
     } catch (error) {
       console.log(error);
     }
@@ -130,6 +139,7 @@ const AddProduct = ({
 
   async function handleIncrement(e) {
     await axios
+      // qty +
       .put(`https://wdev2.be/fs_thomass/shoppinglist/v1/listproduct`, {
         shoppinglist_id: shoppingListId,
         store_id: storeId,
@@ -145,6 +155,7 @@ const AddProduct = ({
 
   async function handleDecrement(e) {
     e.target.dataset.qty > 1 &&
+      //qty -
       (await axios
         .put(`https://wdev2.be/fs_thomass/shoppinglist/v1/listproduct`, {
           shoppinglist_id: shoppingListId,
@@ -160,6 +171,7 @@ const AddProduct = ({
   }
 
   async function handleDelete(e) {
+    //delete product van de lijst
     await fetch(`https://wdev2.be/fs_thomass/shoppinglist/v1/listproduct`, {
       method: "DELETE",
       body: JSON.stringify({
@@ -174,6 +186,7 @@ const AddProduct = ({
 
   async function handleCheck(e) {
     let checked;
+    // checked
     if (
       list.filter((item) => item.product_id == e.target.dataset.id)[0]
         .checked == 0
