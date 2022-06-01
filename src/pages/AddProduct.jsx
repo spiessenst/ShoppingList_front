@@ -16,6 +16,7 @@ const AddProduct = ({
   setList,
   listName,
   setListName,
+  newList,
 }) => {
   const [products, setProducts] = useState([]);
   const [newproduct, setNewProduct] = useState("");
@@ -25,9 +26,12 @@ const AddProduct = ({
   const [departments, setDepartments] = useState([]);
   const [department, setDepartment] = useState();
 
-  useEffect(() => () => {
-    renderList();
-  });
+  useEffect(
+    () => () => {
+      renderList();
+    },
+    []
+  );
 
   useEffect(() => {
     (async () => {
@@ -128,10 +132,9 @@ const AddProduct = ({
       if (data == null) {
         setList([]);
       } else {
-        data && setList(data.items);
-        setStoreName(data.store.store_name);
+        data && data != null && setList(data.items);
+        data && data != null && setStoreName(data.store.store_name);
       }
-      console.log(list);
     } catch (error) {
       console.log(error);
     }

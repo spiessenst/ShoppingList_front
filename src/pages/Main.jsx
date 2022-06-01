@@ -11,6 +11,8 @@ const Main = ({ setshoppingListId, setList, setListName }) => {
         .then(({ data }) => {
           setListName(data[0].shoppinglist_name);
           setshoppingListId(data[0].shoppinglist_id);
+        })
+        .finally(() => {
           setList([]);
         });
     } catch (error) {
